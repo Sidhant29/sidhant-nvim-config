@@ -20,7 +20,6 @@ Plug 'hrsh7th/cmp-nvim-lua'
 "  Snippets
 Plug 'L3MON4D3/LuaSnip'
 Plug 'rafamadriz/friendly-snippets'
-
 Plug 'VonHeikemen/lsp-zero.nvim'
 
 " Themes
@@ -45,6 +44,9 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
+" Github marker integration
+Plug 'lewis6991/gitsigns.nvim'
+
 call plug#end()
 
 lua <<EOF
@@ -52,6 +54,7 @@ local lsp = require('lsp-zero')
 lsp.preset('recommended')
 lsp.setup()
 
+require('gitsigns').setup()
 require('lualine').setup()
 
 -- nvim-treesitter highlight
