@@ -1,6 +1,7 @@
 :set relativenumber
 :set mouse=a
 :set number
+:set background=dark
 
 call plug#begin()
 
@@ -16,6 +17,7 @@ Plug 'hrsh7th/cmp-path'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-nvim-lua'
+Plug 'simrat39/rust-tools.nvim'
 
 "  Snippets
 Plug 'L3MON4D3/LuaSnip'
@@ -27,7 +29,7 @@ Plug 'wittyjudge/gruvbox-material.nvim'
 Plug 'tanvirtin/monokai.nvim'
 Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
-
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'nvim-lualine/lualine.nvim'
 
 " Telescope
@@ -69,7 +71,7 @@ require("indent_blankline").setup {
     -- for example, context is off by default, use this to turn it on
     -- show_current_context = true,
 }
-
+-- telescope cofig
 require("telescope").setup {
   defaults = {
     -- ....
@@ -81,9 +83,27 @@ require("telescope").setup {
   }
 }
 
-EOF
+-- rust tools configs
+local rt = require("rust-tools")
+-- rust_analyzer already has an on_attach function. We don't
+-- want to overwrite that because it has useful maps like `gd`
+-- and S-k etc. So we have to call that existing function inside
+-- the new one that creates specific maps for rust-tools.
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
 
+EOF
+let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'hard'
+let g:gruvbox_transparent_bg = '1'
 filetype plugin on
 nmap <C-/> <Leader>ci
 vmap <C-/> <Leader>ci
