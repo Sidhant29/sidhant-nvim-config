@@ -38,6 +38,7 @@ Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
 
 " or                                , { 'branch': '0.1.x' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 Plug 'psliwka/vim-smoothie'
 Plug 'preservim/nerdcommenter'
 Plug 'lukas-reineke/indent-blankline.nvim'
