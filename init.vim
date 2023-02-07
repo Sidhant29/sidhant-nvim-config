@@ -75,3 +75,5 @@ nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeFind<CR>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+
+lua require('config')
