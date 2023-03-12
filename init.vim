@@ -11,6 +11,7 @@ call plug#begin()
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/mason.nvim'
 Plug 'williamboman/mason-lspconfig.nvim'
+Plug 'jose-elias-alvarez/null-ls.nvim'
 
 " Autocompletion
 Plug 'hrsh7th/nvim-cmp'
@@ -71,6 +72,10 @@ nnoremap <Tab> <C-W>
 nnoremap <leader>p <cmd>Telescope find_files<cr>
 nnoremap <leader>f <cmd>Telescope grep_string<cr>
 nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>gb <cmd>Telescope git_branches<cr>
+nnoremap <leader>gs <cmd>Telescope git_status<cr>
+nnoremap <leader>gc <cmd>Telescope git_commits<cr>
+nnoremap <leader>lr <cmd>Telescope lsp_references<cr>
 nnoremap <leader>n :NERDTreeFocus<CR>
 nnoremap <C-n> :NERDTree<CR>
 nnoremap <C-t> :NERDTreeFind<CR>
