@@ -3,6 +3,7 @@
 :set number
 :set background=dark
 :set laststatus=3
+:set shiftwidth=4 smarttab
 let mapleader = " "
 
 call plug#begin()
@@ -33,10 +34,12 @@ Plug 'rebelot/kanagawa.nvim'
 Plug 'wittyjudge/gruvbox-material.nvim'
 Plug 'morhetz/gruvbox'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'Mofiqul/dracula.nvim'
 
 " Telescope
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.0' }
+Plug 'nvim-telescope/telescope-file-browser.nvim'
 
 " or                                , { 'branch': '0.1.x' }
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -49,8 +52,12 @@ Plug 'lukas-reineke/indent-blankline.nvim'
 Plug 'preservim/nerdtree'
 Plug 'ryanoasis/vim-devicons'
 
-" Github marker integration
+" Github integration
 Plug 'lewis6991/gitsigns.nvim'
+Plug 'pwntester/octo.nvim'
+
+" File Structure Browser
+Plug 'stevearc/aerial.nvim'
 
 call plug#end()
 
@@ -61,7 +68,6 @@ filetype plugin on
 let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark = 'hard'
 let g:gruvbox_transparent_bg = '1'
-colorscheme gruvbox
 
 "Key remappings
 nmap <C-/> <Leader>ci
@@ -76,9 +82,10 @@ nnoremap <leader>gb <cmd>Telescope git_branches<cr>
 nnoremap <leader>gs <cmd>Telescope git_status<cr>
 nnoremap <leader>gc <cmd>Telescope git_commits<cr>
 nnoremap <leader>lr <cmd>Telescope lsp_references<cr>
-nnoremap <leader>n :NERDTreeFocus<CR>
-nnoremap <C-n> :NERDTree<CR>
-nnoremap <C-t> :NERDTreeFind<CR>
+nnoremap <leader>fb <cmd>Telescope file_browser<cr>
+nnoremap <leader>nf <cmd>NERDTreeFind<CR>
+nnoremap <leader>nt <cmd>NERDTreeToggle<CR>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 lua require('config')
+colorscheme dracula

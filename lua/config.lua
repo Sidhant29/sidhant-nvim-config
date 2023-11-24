@@ -4,8 +4,14 @@ lsp.preset('recommended')
 lsp.setup()
 
 require('gitsigns').setup()
+require('octo').setup()
 signcolumn = true,
 require('lualine').setup()
+
+local kanagawa = require("kanagawa")
+kanagawa.setup({
+    transparent=true,
+})
 
 -- nvim-treesitter highlight
 require'nvim-treesitter.configs'.setup {
@@ -15,10 +21,7 @@ require'nvim-treesitter.configs'.setup {
 }
 
 -- line indent
-require("indent_blankline").setup {
-    -- for example, context is off by default, use this to turn it on
-    -- show_current_context = true,
-}
+require("indent_blankline").setup {}
 -- telescope cofig
 require("telescope").setup {
   defaults = {
@@ -28,8 +31,14 @@ require("telescope").setup {
     find_files = {
       find_command = { "fd", "--type", "f" }
    },
+  },
+  extensions = {
+    file_browser = {
+	grouped = true,
+    }
   }
 }
+require("telescope").load_extension "file_browser"
 
 -- rust tools configs
 local rt = require("rust-tools")
@@ -59,3 +68,27 @@ null_ls.setup({
 	},
 
 })
+
+-- aerial setup
+require('aerial').setup({
+  -- optionally use on_attach to set keymaps when aerial has attached to a buffer
+  autojump = true,
+  on_attach = function(bufnr)
+    -- Jump forwards/backwards with '{' and '}'
+    vim.keymap.set('n', '{', '<cmd>AerialPrev<CR>', {buffer = bufnr})
+    vim.keymap.set('n', '}', '<cmd>AerialNext<CR>', {buffer = bufnr})
+  end
+})
+-- You probably also want to set a keymap to toggle aerial
+vim.keymap.set('n', '<leader>.', '<cmd>AerialToggle!<CR>')
+
+-- Add ruff_lsp for python
+require('lspconfig').ruff_lsp.setup {
+  on_attach = on_attach,
+  init_options = {
+    settings = {
+      -- Any extra CLI arguments for `ruff` go here.
+      args = {},
+    }
+  }
+}
