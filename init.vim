@@ -86,6 +86,8 @@ nnoremap <leader>fb <cmd>Telescope file_browser<cr>
 nnoremap <leader>nf <cmd>NERDTreeFind<CR>
 nnoremap <leader>nt <cmd>NERDTreeToggle<CR>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
+imap <silent><script><expr> <C-Enter> copilot#Accept("\<CR>")
+let g:copilot_no_tab_map = v:true
 
 lua require('config')
 colorscheme dracula
