@@ -1,8 +1,8 @@
 return {
     {
-	"rebelot/kanagawa.nvim",
-	config = {
-	    transparent = true,
-	}
-    }
+        "rebelot/kanagawa.nvim",
+        config = {
+            transparent = true,
+        },
+    },
 }
