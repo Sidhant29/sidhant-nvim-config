@@ -4,7 +4,7 @@
 vim.g.mapleader = " "
 --vim.g.copilot_no_tab_map = true
 -- Configure how the status line is displayed
-vim.o.laststatus = 3
+vim.o.laststatus = 1
 -- Configure how Tabs are inserted,
 ---- 'smarttab' allows to use custom tab lengths with 'shiftwidth'
 vim.o.smarttab = true
@@ -21,9 +21,6 @@ vim.g.mouse = "a"
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.opt.termguicolors = true
-
--- Use the system clipboard for all copy/paste
-vim.api.nvim_set_option("clipboard", "unnamed")
 
 -- ********** Install and configure Lazy.nvim package manager
 
@@ -59,7 +56,7 @@ vim.keymap.set("n", "<Leader>fgs", "<cmd>Telescope git_status<cr>", { desc = "Fi
 vim.keymap.set("n", "<Leader>fgc", "<cmd>Telescope git_commits<cr>", { desc = "Find git commits" })
 vim.keymap.set("n", "<Leader>fr", "<cmd>Telescope lsp_references<cr>", { desc = "Find Lsp References" })
 vim.keymap.set("n", "<Leader>fd", "<cmd>Telescope lsp_definitions<cr>", { desc = "Find Lsp Definitions" })
-vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
+vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle<CR>")
 
 -- NvimTree
 vim.keymap.set("n", "<leader>ee", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle file explorer" })

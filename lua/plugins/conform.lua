@@ -10,6 +10,7 @@ return {
                 vue = { "prettier" },
                 typescript = { "prettier" },
                 python = { "ruff" },
+                json = { "prettierd" },
             },
         })
         vim.keymap.set({ "n", "v" }, "<leader>ll", function()

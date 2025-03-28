@@ -9,6 +9,10 @@ return {
         require("nvim-tree").setup({
             view = {
                 relativenumber = true,
+                float = { enable = true },
+                -- A table indicates that the view should be dynamically sized based on the
+                -- longest line. :help nvim-tree-opts-view
+                width = {},
             },
             git = {
                 ignore = false,
