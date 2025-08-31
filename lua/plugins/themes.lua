@@ -5,4 +5,10 @@ return {
             transparent = true,
         },
     },
+    {
+      "sainnhe/everforest",
+      config = {
+        transparent = true,
+      },
+    },
 }

@@ -40,7 +40,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins")
 
 -- ********** Set Color Scheme
-vim.cmd("colorscheme kanagawa")
+vim.cmd("colorscheme everforest")
 
 -- ********** Key Mappings
 vim.keymap.set("n", "<Tab>", "<C-W>")
