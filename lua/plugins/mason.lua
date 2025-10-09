@@ -1,67 +1,52 @@
 return {
-    "williamboman/mason.nvim",
+    "mason-org/mason.nvim",
     dependencies = {
-        "williamboman/mason-lspconfig.nvim",
+        "mason-org/mason-lspconfig.nvim",
         "nvim-lua/plenary.nvim",
         "neovim/nvim-lspconfig",
     },
+    opts = {},
     config = function()
-        local lsp = require("lsp-zero")
-        lsp.preset("recommended")
-        lsp.on_attach(function(client, bufnr)
-            lsp.default_keymaps({ buffer = bufnr })
-        end)
-        require("lsp-zero").setup()
         require("mason").setup()
+        -- put in after/lsp/pyright
+        vim.lsp.config.pyright = {
+            settings = {
+                python = {
+                    -- analysis = {
+                    --     -- disable analysis features and default to ruff
+                    --     ignore = { "*" },
+                    -- },
+                    pyright = {
+                        disableOrganizeImports = true,
+                    },
+                },
+            },
+        }
+        -- Add to  after/lsp/ts_ls
+        local vue_language_server_path = vim.fn.stdpath("data")
+            .. "/mason/packages/vue-language-server/node_modules/@vue/language-server"
+
+        local tsserver_filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" }
+        local vue_plugin = {
+            name = "@vue/typescript-plugin",
+            location = vue_language_server_path,
+            languages = { "vue" },
+            configNamespace = "typescript",
+        }
+        local ts_ls_config = {
+            init_options = {
+                plugins = {
+                    vue_plugin,
+                },
+            },
+            filetypes = tsserver_filetypes,
+        }
+        vim.lsp.config("ts_ls", ts_ls_config)
+        vim.lsp.config.vue_ls = {}
 
         require("mason-lspconfig").setup({
-            ensure_installed = { "ruff", "volar" },
+            ensure_installed = { "ruff", "vue_ls", "ts_ls" },
             automatic_installation = true,
-        })
-
-        require("mason-lspconfig").setup_handlers({
-            -- check `:h mason-lspconfig-automatic-server-setup` for details.
-            -- set servers automatically
-            function(server_name)
-                require("lspconfig")[server_name].setup({})
-            end,
-            -- dedicated handlers for specific servers
-            -- For Volar
-            ["volar"] = function()
-                local mason_registry = require("mason-registry")
-                local vue_language_server_path = mason_registry.get_package("vue-language-server"):get_install_path()
-                    .. "/node_modules/@vue/language-server"
-                local lspconfig = require("lspconfig")
-                lspconfig.ts_ls.setup({
-                    init_options = {
-                        plugins = {
-                            {
-                                name = "@vue/typescript-plugin",
-                                location = vue_language_server_path,
-                                languages = { "vue" },
-                            },
-                        },
-                    },
-                    filetypes = { "typescript", "javascript", "javascriptreact", "typescriptreact", "vue" },
-                })
-                lspconfig.volar.setup({})
-            end,
-            ["pyright"] = function()
-                local pyright = require("lspconfig").pyright.setup({
-                    settings = {
-                        pyright = {
-                            -- Using Ruff's import organizer
-                            disableOrganizeImports = true,
-                        },
-                        python = {
-                            analysis = {
-                                -- Ignore all files for analysis to exclusively use Ruff for linting
-                                -- ignore = { '*' },
-                            },
-                        },
-                    },
-                })
-            end,
         })
     end,
 }
