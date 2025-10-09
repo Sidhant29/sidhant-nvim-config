@@ -9,7 +9,7 @@ return {
                 javascript = { "prettier" },
                 vue = { "prettier" },
                 typescript = { "prettier" },
-                python = { "ruff" },
+                python = { "ruff_format", "ruff_organize_imports" },
                 json = { "prettierd" },
             },
         })
